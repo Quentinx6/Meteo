@@ -47,6 +47,7 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let iconTomorrow = data["daily"]["1"]["weather"]["0"]["icon"];
         let dateTomorrow = new Date(unixTomorrow * 1000);
         let dayTomorrow = dateTomorrow.getDate();
+        let jourTomorrow = dateTomorrow.getDay();
         let monthTomorrow = dateTomorrow.getMonth()+1;
         let tempTomorrowHtml = document.createElement("p");
         let pressionTomorrowHtml = document.createElement("p");
@@ -61,7 +62,87 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let unix2 = data["daily"]["2"]["dt"];
         let icon2 = data["daily"]["2"]["weather"]["0"]["icon"];
         let date2 = new Date(unix2 * 1000);
+        let jour2 = date2.getDay();
+        let day2 = date2.getDate();
+        let month2 = date2.getMonth()+1;
+        let div2 = document.createElement("div");
+        let day2Html = document.createElement("p");
+        let temp2Html = document.createElement("p");
+        let pression2Html = document.createElement("p");
+        let icon2Html = document.createElement("img");
 
+        //Meteo 3 jours plus tard - declaration des variables
+        let temp3 = Math.floor(data["daily"]["3"]["temp"]["eve"]);
+        let pression3 = data["daily"]["3"]["pressure"]
+        let unix3 = data["daily"]["3"]["dt"];
+        let icon3 = data["daily"]["3"]["weather"]["0"]["icon"];
+        let date3 = new Date(unix3 * 1000);
+        let jour3 = date3.getDay();
+        let day3 = date3.getDate();
+        let month3 = date3.getMonth()+1;
+        let div3 = document.createElement("div");
+        let day3Html = document.createElement("p");
+        let temp3Html = document.createElement("p");
+        let pression3Html = document.createElement("p");
+        let icon3Html = document.createElement("img");
+
+        if(isNaN(jour2)){
+            console.log("Ce n'est pas un nombre");
+        }else{
+            if(jourTomorrow === 0){
+                jourTomorrow = "Dim";
+            }else if(jourTomorrow === 1){
+                jourTomorrow = "Lun";
+            }else if(jourTomorrow === 2){
+                jourTomorrow = "Mar";
+            }else if(jourTomorrow === 3){
+                jourTomorrow = "Mer";
+            }else if(jourTomorrow === 4){
+                jourTomorrow = "Jeu";
+            }else if(jourTomorrow === 5){
+                jourTomorrow = "Ven";
+            }else if(jourTomorrow === 6){
+                jourTomorrow = "Sam";   
+            }
+        }
+        if(isNaN(jour2)){
+            console.log("Ce n'est pas un nombre");
+        }else{
+            if(jour2 === 0){
+                jour2 = "Dim";
+            }else if(jour2 === 1){
+                jour2 = "Lun";
+            }else if(jour2 === 2){
+                jour2 = "Mar";
+            }else if(jour2 === 3){
+                jour2 = "Mer";
+            }else if(jour2 === 4){
+                jour2 = "Jeu";
+            }else if(jour2 === 5){
+                jour2 = "Ven";
+            }else if(jour2 === 6){
+                jour2 = "Sam";   
+            }
+        }
+        if(isNaN(jour3)){
+            console.log("Ce n'est pas un nombre");
+        }else{
+            if(jour3 === 0){
+                jour3 = "Dim";
+            }else if(jour3 === 1){
+                jour3 = "Lun";
+            }else if(jour3 === 2){
+                jour3 = "Mar";
+            }else if(jour3 === 3){
+                jour3 = "Mer";
+            }else if(jour3 === 4){
+                jour3 = "Jeu";
+            }else if(jour3 === 5){
+                jour3 = "Ven";
+            }else if(jour3 === 6){
+                jour3 = "Sam";   
+            }
+        }
         body.appendChild(section);
         section.appendChild(divToday);
             divToday.appendChild(heureAffichageHtml);
@@ -78,6 +159,16 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
             divTomorrowHtml.appendChild(tempTomorrowHtml);
             divTomorrowHtml.appendChild(pressionTomorrowHtml);
             divTomorrowHtml.appendChild(iconTomorrowHtml);
+        section.appendChild(div2);
+            div2.appendChild(day2Html);
+            div2.appendChild(temp2Html);
+            div2.appendChild(pression2Html);
+            div2.appendChild(icon2Html);
+        section.appendChild(div3);
+            div3.appendChild(day3Html);
+            div3.appendChild(temp3Html);
+            div3.appendChild(pression3Html);
+            div3.appendChild(icon3Html);
 
         heureAffichageHtml.innerHTML = meteoToday + hours + " h";
         temperatureHtml.innerHTML = temp + uniteDegre;
@@ -89,11 +180,20 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         temperatureExacte.innerHTML = tempExacte + uniteDegre;
         pressionExacte.innerHTML = presExacte + unitePascal;
 
-        dayTomorrowHtml.innerHTML = dayTomorrow + " / " + monthTomorrow;
+        dayTomorrowHtml.innerHTML = jourTomorrow + " " +dayTomorrow + " / " + monthTomorrow;
         tempTomorrowHtml.innerHTML = tempTomorrow + uniteDegre;
         pressionTomorrowHtml.innerHTML = pressionTomorrow + unitePascal;
         iconTomorrowHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+iconTomorrow+".png")
 
+        day2Html.innerHTML = jour2 + " " +day2 + " / " + month2;
+        temp2Html.innerHTML = temp2 + uniteDegre;
+        pression2Html.innerHTML = pression2 + unitePascal;
+        icon2Html.setAttribute("src", "http://openweathermap.org/img/wn/"+icon2+".png");
+
+        day3Html.innerHTML = jour3 + " " +day3 + " / " + month3;
+        temp3Html.innerHTML = temp3 + uniteDegre;
+        pression3Html.innerHTML = pression3 + unitePascal;
+        icon3Html.setAttribute("src", "http://openweathermap.org/img/wn/"+icon3+".png");
 
 
         // function checkTime(i) {
