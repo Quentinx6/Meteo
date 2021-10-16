@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Titillium-Regular";
+  src: url(./Font/TitilliumWeb-Regular.ttf);
+}
+body {
+  font-family: Titillium-Regular;
+  margin: 0;
+  background-color: #48484A;
+}
+
+#title {
+  text-align: center;
+  color: wheat;
+}
+
+section {
+  display: flex;
+  width: 100%;
+  color: #f5f1ea;
+}
+section div {
+  border: 2px solid #a5a5a5;
+  border-radius: 5px;
+  padding: 20px;
+}
+section .divToday {
+  border: 2px solid #a5a5a5;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */

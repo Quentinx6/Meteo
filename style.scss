@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "Titillium-Regular";
+    src: url(./Font/TitilliumWeb-Regular.ttf);
+}
+body{
+    font-family: Titillium-Regular;
+    margin: 0;
+    // background-image: url(./img/fond.jpg);
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    background-color: #48484A;
+
+}
+#title{
+    text-align: center;
+    color: wheat;
+}
+section{
+    display: flex;
+    width: 100%;
+    color: rgb(245, 241, 234);
+    div{
+        border: 2px solid rgb(165, 165, 165);
+        border-radius: 5px;
+        padding: 20px;
+    }
+    .divToday{
+        border: 2px solid rgb(165, 165, 165);
+        border-radius: 5px;
+        padding: 20px;
+    }
+    .divHeure{
+    
+    }
+    .divTomorrow{
+    
+    }
+}
