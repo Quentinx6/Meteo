@@ -13,12 +13,18 @@ body{
 }
 #title{
     text-align: center;
-    color: wheat;
+    color: rgb(240, 213, 164);
 }
 section{
-    display: flex;
-    width: 100%;
+    display: grid;
+    width: 85%;
+    margin: auto;
     color: rgb(245, 241, 234);
+    gap: 20px;
+    grid-template-areas: 
+        "a a a a"
+        "b b c c"
+        "d d e f";
     div{
         border: 2px solid rgb(165, 165, 165);
         border-radius: 5px;
@@ -28,11 +34,21 @@ section{
         border: 2px solid rgb(165, 165, 165);
         border-radius: 5px;
         padding: 20px;
+        grid-area: a;
     }
     .divHeure{
-    
+        grid-area: b;
     }
     .divTomorrow{
-    
+        grid-area: c;
+    }
+    .div2{
+        grid-area: d;
+    }
+    .div3{
+        grid-area: e;
+    }
+    .div4{
+        grid-area: f;
     }
 }

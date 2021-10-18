@@ -5,17 +5,18 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         console.log(data)
         let divToday = document.createElement("div");
         divToday.setAttribute("class", "divToday");
-        let tempExacte = Math.floor(data["current"]["temp"]);
-        let presExacte = data["current"]["pressure"];
+        let tempExacte = Math.floor(data["hourly"]["2"]["temp"]);
+        let presExacte = data["hourly"]["2"]["pressure"];
+        let iconExacte = data["hourly"]["2"]["weather"]["0"]["icon"];
+        let iconExacteHtml = document.createElement("img");
         let temp = Math.floor(data["hourly"]["0"]["temp"]);
         let meteoToday = "La météo d'aujourd'hui à "; 
-        let temperatureTexte = "La temperature est de : ";
-        let pressionHtml = "La pression atmosphérique est de : "
+        let pressionHtml = "La pression atmosphérique est de : ";
         let pressure = data["hourly"]["0"]["pressure"];
-        let humidity = data["current"]["humidity"];
+        let humidity = data["hourly"]["0"]["humidity"];
         let icon = data["current"]["weather"]["0"]["icon"];
         let unix_timestamp = data["hourly"]["0"]["dt"]
-        let unix_heureExacte = data["current"]["dt"];
+        let unix_heureExacte = data["hourly"]["2"]["dt"];
         let date = new Date(unix_timestamp * 1000);
         let dateExacte = new Date(unix_heureExacte * 1000);
         let hours = date.getHours();
@@ -66,6 +67,7 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let day2 = date2.getDate();
         let month2 = date2.getMonth()+1;
         let div2 = document.createElement("div");
+        div2.setAttribute("class" , "div2")
         let day2Html = document.createElement("p");
         let temp2Html = document.createElement("p");
         let pression2Html = document.createElement("p");
@@ -81,10 +83,30 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let day3 = date3.getDate();
         let month3 = date3.getMonth()+1;
         let div3 = document.createElement("div");
+        div3.setAttribute("class", "div3")
         let day3Html = document.createElement("p");
         let temp3Html = document.createElement("p");
         let pression3Html = document.createElement("p");
         let icon3Html = document.createElement("img");
+
+        //Meteo 4 jours plus tard - declaration des variables
+
+        let temp4 = Math.floor(data["daily"]["4"]["temp"]["eve"]);
+        let pression4 = data["daily"]["4"]["pressure"]
+        let unix4 = data["daily"]["4"]["dt"];
+        let icon4 = data["daily"]["4"]["weather"]["0"]["icon"];
+        let date4 = new Date(unix4 * 1000);
+        let jour4 = date4.getDay();
+        let day4 = date4.getDate();
+        let month4 = date4.getMonth()+1;
+        let div4 = document.createElement("div");
+        div4.setAttribute("class", "div4")
+        let day4Html = document.createElement("p");
+        let temp4Html = document.createElement("p");
+        let pression4Html = document.createElement("p");
+        let icon4Html = document.createElement("img");
+
+
 
         if(isNaN(jour2)){
             console.log("Ce n'est pas un nombre");
@@ -143,6 +165,25 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
                 jour3 = "Sam";   
             }
         }
+        if(isNaN(jour4)){
+            console.log("Ce n'est pas un nombre");
+        }else{
+            if(jour4 === 0){
+                jour4 = "Dim";
+            }else if(jour4 === 1){
+                jour4 = "Lun";
+            }else if(jour4 === 2){
+                jour4 = "Mar";
+            }else if(jour4 === 3){
+                jour4 = "Mer";
+            }else if(jour4 === 4){
+                jour4 = "Jeu";
+            }else if(jour4 === 5){
+                jour4 = "Ven";
+            }else if(jour4 === 6){
+                jour4 = "Sam";   
+            }
+        }
         body.appendChild(section);
         section.appendChild(divToday);
             divToday.appendChild(heureAffichageHtml);
@@ -154,6 +195,7 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
             divHeure.appendChild(heureExacte);
             divHeure.appendChild(temperatureExacte);
             divHeure.appendChild(pressionExacte);
+            divHeure.appendChild(iconExacteHtml);
         section.appendChild(divTomorrowHtml);
             divTomorrowHtml.appendChild(dayTomorrowHtml);
             divTomorrowHtml.appendChild(tempTomorrowHtml);
@@ -169,6 +211,11 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
             div3.appendChild(temp3Html);
             div3.appendChild(pression3Html);
             div3.appendChild(icon3Html);
+        section.appendChild(div4);
+            div4.appendChild(day4Html);
+            div4.appendChild(temp4Html);
+            div4.appendChild(pression4Html);
+            div4.appendChild(icon4Html);
 
         heureAffichageHtml.innerHTML = meteoToday + hours + " h";
         temperatureHtml.innerHTML = temp + uniteDegre;
@@ -179,6 +226,7 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         heureExacte.innerHTML = formattedTime;
         temperatureExacte.innerHTML = tempExacte + uniteDegre;
         pressionExacte.innerHTML = presExacte + unitePascal;
+        iconExacteHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+iconExacte+".png");
 
         dayTomorrowHtml.innerHTML = jourTomorrow + " " +dayTomorrow + " / " + monthTomorrow;
         tempTomorrowHtml.innerHTML = tempTomorrow + uniteDegre;
@@ -194,6 +242,11 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         temp3Html.innerHTML = temp3 + uniteDegre;
         pression3Html.innerHTML = pression3 + unitePascal;
         icon3Html.setAttribute("src", "http://openweathermap.org/img/wn/"+icon3+".png");
+
+        day4Html.innerHTML = jour4 + " " +day4 + " / " + month4;
+        temp4Html.innerHTML = temp4 + uniteDegre;
+        pression4Html.innerHTML = pression4 + unitePascal;
+        icon4Html.setAttribute("src", "http://openweathermap.org/img/wn/"+icon4+".png");
 
 
         // function checkTime(i) {

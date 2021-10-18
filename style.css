@@ -10,13 +10,16 @@ body {
 
 #title {
   text-align: center;
-  color: wheat;
+  color: #f0d5a4;
 }
 
 section {
-  display: flex;
-  width: 100%;
+  display: grid;
+  width: 85%;
+  margin: auto;
   color: #f5f1ea;
+  gap: 20px;
+  grid-template-areas: "a a a a" "b b c c" "d d e f";
 }
 section div {
   border: 2px solid #a5a5a5;
@@ -27,6 +30,22 @@ section .divToday {
   border: 2px solid #a5a5a5;
   border-radius: 5px;
   padding: 20px;
+  grid-area: a;
+}
+section .divHeure {
+  grid-area: b;
+}
+section .divTomorrow {
+  grid-area: c;
+}
+section .div2 {
+  grid-area: d;
+}
+section .div3 {
+  grid-area: e;
+}
+section .div4 {
+  grid-area: f;
 }
 
 /*# sourceMappingURL=style.css.map */
