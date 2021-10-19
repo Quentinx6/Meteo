@@ -5,7 +5,7 @@
 body {
   font-family: Titillium-Regular;
   margin: 0;
-  background-color: #48484A;
+  background-color: #1A2536;
 }
 
 #title {
@@ -19,10 +19,10 @@ section {
   margin: auto;
   color: #f5f1ea;
   gap: 20px;
-  grid-template-areas: "a a a a" "b b c c" "d d e f";
+  grid-template-areas: "a a a a" "b b c c" "d e f g";
 }
 section div {
-  border: 2px solid #a5a5a5;
+  border: 2px solid #5d5d5d;
   border-radius: 5px;
   padding: 20px;
 }
@@ -35,17 +35,26 @@ section .divToday {
 section .divHeure {
   grid-area: b;
 }
-section .divTomorrow {
+section .divsix {
   grid-area: c;
 }
-section .div2 {
+section .divTomorrow {
   grid-area: d;
 }
-section .div3 {
+section .divTomorrow .tempMaxTomorrow {
+  color: #f1a138;
+}
+section .divTomorrow .tempMinTomorrow {
+  color: #0099ff;
+}
+section .div2 {
   grid-area: e;
 }
-section .div4 {
+section .div3 {
   grid-area: f;
+}
+section .div4 {
+  grid-area: g;
 }
 
 /*# sourceMappingURL=style.css.map */

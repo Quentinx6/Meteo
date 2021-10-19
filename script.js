@@ -12,10 +12,10 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let temp = Math.floor(data["hourly"]["0"]["temp"]);
         let meteoToday = "La météo d'aujourd'hui à "; 
         let pressionHtml = "La pression atmosphérique est de : ";
-        let pressure = data["hourly"]["0"]["pressure"];
-        let humidity = data["hourly"]["0"]["humidity"];
+        let pressure = data["current"]["pressure"];
+        let humidity = data["current"]["humidity"];
         let icon = data["current"]["weather"]["0"]["icon"];
-        let unix_timestamp = data["hourly"]["0"]["dt"]
+        let unix_timestamp = data["current"]["dt"];
         let unix_heureExacte = data["hourly"]["2"]["dt"];
         let date = new Date(unix_timestamp * 1000);
         let dateExacte = new Date(unix_heureExacte * 1000);
@@ -41,8 +41,25 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let body = document.body
         let section = document.getElementById("section");
 
+        //Meteo dans 6h - declaration des variables
+
+        let tempsix = Math.floor(data["hourly"]["5"]["temp"]);
+        let pressionsix = data["hourly"]["5"]["pressure"]
+        let unixsix = data["hourly"]["5"]["dt"];
+        let iconsix = data["hourly"]["5"]["weather"]["0"]["icon"];
+        let datesix = new Date(unixsix * 1000);
+        let heuresix = "0" + datesix.getHours() + " : " + minutesExacte.substr(-2);
+        let temperaturesixHtml = document.createElement("p");
+        let pressionsixHtml = document.createElement("p");
+        let heuresixHtml = document.createElement("p");
+        let iconsixHtml = document.createElement("img");
+        let divsix = document.createElement("div");
+        divsix.setAttribute("class", "divsix");
+
         //Meteo du lendemain - declaration des variables
         let tempTomorrow = Math.floor(data["daily"]["1"]["temp"]["eve"]);
+        let tempMinTomorrow = Math.floor(data["daily"]["1"]["temp"]["min"]);
+        let tempMaxTomorrow = Math.floor(data["daily"]["1"]["temp"]["max"]);
         let pressionTomorrow = data["daily"]["1"]["pressure"]
         let unixTomorrow = data["daily"]["1"]["dt"];
         let iconTomorrow = data["daily"]["1"]["weather"]["0"]["icon"];
@@ -50,12 +67,16 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let dayTomorrow = dateTomorrow.getDate();
         let jourTomorrow = dateTomorrow.getDay();
         let monthTomorrow = dateTomorrow.getMonth()+1;
-        let tempTomorrowHtml = document.createElement("p");
+        let tempTomorrowHtml = document.createElement("span");
+        let tempMaxTomorrowHtml = document.createElement("span");
+        let tempMinTomorrowHtml = document.createElement("span");
         let pressionTomorrowHtml = document.createElement("p");
         let dayTomorrowHtml = document.createElement("p");
         let iconTomorrowHtml = document.createElement("img");
         let divTomorrowHtml = document.createElement("div");
         divTomorrowHtml.setAttribute("class", "divTomorrow");
+        tempMaxTomorrowHtml.setAttribute("class", "tempMaxTomorrow");
+        tempMinTomorrowHtml.setAttribute("class", "tempMinTomorrow");
 
         //Meteo du sur-lendemain - declaration des variables
         let temp2 = Math.floor(data["daily"]["2"]["temp"]["eve"]);
@@ -196,9 +217,16 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
             divHeure.appendChild(temperatureExacte);
             divHeure.appendChild(pressionExacte);
             divHeure.appendChild(iconExacteHtml);
+        section.appendChild(divsix);
+            divsix.appendChild(heuresixHtml);
+            divsix.appendChild(temperaturesixHtml);
+            divsix.appendChild(pressionsixHtml);
+            divsix.appendChild(iconsixHtml);
         section.appendChild(divTomorrowHtml);
             divTomorrowHtml.appendChild(dayTomorrowHtml);
+            divTomorrowHtml.appendChild(tempMinTomorrowHtml);
             divTomorrowHtml.appendChild(tempTomorrowHtml);
+            divTomorrowHtml.appendChild(tempMaxTomorrowHtml)
             divTomorrowHtml.appendChild(pressionTomorrowHtml);
             divTomorrowHtml.appendChild(iconTomorrowHtml);
         section.appendChild(div2);
@@ -219,17 +247,24 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
 
         heureAffichageHtml.innerHTML = meteoToday + hours + " h";
         temperatureHtml.innerHTML = temp + uniteDegre;
-        pressureP.innerHTML = pressionHtml + pressure + unitePascal;
+        pressureP.innerHTML = "Pression : " + pressure + unitePascal;
         iconImg.setAttribute("src", "http://openweathermap.org/img/wn/"+icon+".png");
-        pHumidity.innerHtml = humidity + " %";
+        pHumidity.innerHTML = "Humidité : " + humidity + " %"
 
         heureExacte.innerHTML = formattedTime;
         temperatureExacte.innerHTML = tempExacte + uniteDegre;
         pressionExacte.innerHTML = presExacte + unitePascal;
         iconExacteHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+iconExacte+".png");
 
+        heuresixHtml.innerHTML = heuresix;
+        temperaturesixHtml.innerHTML = tempsix + uniteDegre;
+        pressionsixHtml.innerHTML = pressionsix + unitePascal;
+        iconsixHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+iconsix+".png");
+
         dayTomorrowHtml.innerHTML = jourTomorrow + " " +dayTomorrow + " / " + monthTomorrow;
-        tempTomorrowHtml.innerHTML = tempTomorrow + uniteDegre;
+        tempMinTomorrowHtml.innerHTML = tempMinTomorrow + uniteDegre;
+        tempTomorrowHtml.innerHTML = " - " +  tempTomorrow + uniteDegre + " - ";
+        tempMaxTomorrowHtml.innerHTML = tempMaxTomorrow + uniteDegre;
         pressionTomorrowHtml.innerHTML = pressionTomorrow + unitePascal;
         iconTomorrowHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+iconTomorrow+".png")
 

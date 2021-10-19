@@ -8,7 +8,7 @@ body{
     // background-image: url(./img/fond.jpg);
     // background-repeat: no-repeat;
     // background-size: cover;
-    background-color: #48484A;
+    background-color: #1A2536;
 
 }
 #title{
@@ -24,9 +24,9 @@ section{
     grid-template-areas: 
         "a a a a"
         "b b c c"
-        "d d e f";
+        "d e f g";
     div{
-        border: 2px solid rgb(165, 165, 165);
+        border: 2px solid rgb(93, 93, 93);
         border-radius: 5px;
         padding: 20px;
     }
@@ -39,16 +39,25 @@ section{
     .divHeure{
         grid-area: b;
     }
+    .divsix{
+        grid-area : c
+    }
     .divTomorrow{
-        grid-area: c;
+        grid-area: d;
+        .tempMaxTomorrow{
+            color: rgb(241, 161, 56);
+        }
+        .tempMinTomorrow{
+            color: rgb(0, 153, 255);
+        }   
     }
     .div2{
-        grid-area: d;
-    }
-    .div3{
         grid-area: e;
     }
-    .div4{
+    .div3{
         grid-area: f;
+    }
+    .div4{
+        grid-area: g;
     }
 }
