@@ -31,6 +31,33 @@ section .divToday {
   border-radius: 5px;
   padding: 20px;
   grid-area: a;
+  text-align: center;
+  display: grid;
+  grid-template-areas: "a e" "b f" "c g" "d h";
+}
+section .divToday .heure {
+  grid-area: a;
+}
+section .divToday .temperature {
+  grid-area: b;
+}
+section .divToday .precisionImg {
+  grid-area: c;
+}
+section .divToday .pression {
+  grid-area: d;
+}
+section .divToday .humidite {
+  grid-area: e;
+}
+section .divToday .soleilCycle {
+  grid-area: f;
+}
+section .divToday .uv {
+  grid-area: g;
+}
+section .divToday .vent {
+  grid-area: h;
 }
 section .divHeure {
   grid-area: b;
@@ -40,6 +67,7 @@ section .divsix {
 }
 section .divTomorrow {
   grid-area: d;
+  text-align: center;
 }
 section .divTomorrow .tempMaxTomorrow {
   color: #f1a138;
@@ -49,12 +77,15 @@ section .divTomorrow .tempMinTomorrow {
 }
 section .div2 {
   grid-area: e;
+  text-align: center;
 }
 section .div3 {
   grid-area: f;
+  text-align: center;
 }
 section .div4 {
   grid-area: g;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */
