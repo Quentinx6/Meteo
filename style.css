@@ -5,7 +5,9 @@
 body {
   font-family: Titillium-Regular;
   margin: 0;
-  background-color: #1A2536;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("./img/fond_meteo.jpg");
 }
 
 #title {
