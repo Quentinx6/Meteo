@@ -173,6 +173,21 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let pression4Html = document.createElement("p");
         let icon4Html = document.createElement("img");
 
+        //Changement de fond en fonction de l'icon
+        let iconActuel = data["current"]["weather"]["0"]["icon"];
+        console.log(iconActuel.substr(2)); 
+        console.log(parseInt(iconActuel.substr(0,2)));
+        if(iconActuel.substr(2) == "d"){
+            if(parseInt(iconActuel.substr(0,2)) > 4){
+                body.style.background = "url('./img/cielCouvert.jpeg')";
+            }else{
+                body.style.background = "url('./img/fond_meteo.jpg')";
+                console.log()
+            }
+        }else{
+
+        }
+
         //Attribution de class pour la grille divToday
 
         heureAffichageHtml.setAttribute("class", "heure");
