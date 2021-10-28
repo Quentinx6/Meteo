@@ -5,7 +5,8 @@
 body {
   font-family: Titillium-Regular;
   margin: 0;
-  background-color: #1A2536;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 #title {
