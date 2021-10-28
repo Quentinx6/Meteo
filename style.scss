@@ -23,7 +23,7 @@ section{
     gap: 20px;
     grid-template-areas: 
         "a a a a"
-        "b b c c"
+        "b c h i"
         "d e f g";
     div{
         border: 2px solid rgb(93, 93, 93);
@@ -38,40 +38,83 @@ section{
         text-align: center;
         display: grid;
         grid-template-areas: 
-            "a e"
-            "b f"
-            "c g"
-            "d h";
+            "a a"
+            "b e"
+            "c f"
+            "d g";
         .heure{
             grid-area: a;
         }
         .temperature{
             grid-area: b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span{
+                margin: 20px 10px;
+            }
         }
-        .precisionImg{
+        .precisionIcon{
             grid-area: c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .pression{
             grid-area: d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .humidite{
             grid-area: e;
         }
         .soleilCycle{
             grid-area: f;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            div{
+                border: none;
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-around;
+                span{
+                    margin: 0 10px;
+                }
+            }
         }
         .uv{
             grid-area: g;
-        }
-        .vent{
-            grid-area: h;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            p{
+                display: flex;
+                align-items: center;
+                span{
+                    margin: 20px 10px;
+                }
+            }
+
         }
     }
     .divHeure{
         grid-area: b;
+        text-align: center;
     }
     .divsix{
-        grid-area : c
+        grid-area : c;
+        text-align: center;
+    }
+    .divHuit{
+        grid-area: h;
+        text-align: center;
+    }
+    .divDix{
+        grid-area: i;
+        text-align: center;
     }
     .divTomorrow{
         grid-area: d;
@@ -86,13 +129,96 @@ section{
     .div2{
         grid-area: e;
         text-align: center;
+        .temp2Max{
+            color: rgb(241, 161, 56);
+        }
+        .temp2Min{
+            color: rgb(0, 153, 255);
+        }
     }
     .div3{
         grid-area: f;
         text-align: center;
+        .temp3Max{
+            color: rgb(241, 161, 56);
+        }
+        .temp3Min{
+            color: rgb(0, 153, 255);
+        }
     }
     .div4{
         grid-area: g;
         text-align: center;
+        .temp4Max{
+            color: rgb(241, 161, 56);
+        }
+        .temp4Min{
+            color: rgb(0, 153, 255);
+        }
     }
 }
+
+/*             Tablette Responsive             */
+
+/*             Mobile Responsive             */
+@media screen and (max-width: 500px) and (min-width:351px){
+    #section{
+        .soleilCycle{
+            div{
+                span{
+                    margin: 0 10px;
+                    font-size: 11px;
+                }
+            }
+        }
+        grid-template-areas: 
+            "a a a"
+            "b b c"
+            "h i d "
+            "e f g";
+        .divToday{
+            grid-template-areas: 
+            "a a"
+            "d b"
+            "f f"
+            "c e"
+            "g g";
+        }
+    }
+}   
+@media screen and (max-width: 350px){
+    #section{
+        .soleilCycle{
+            grid-area: f;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            div{
+                border: none;
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-around;
+                span{
+                    margin: 0 10px;
+                    font-size: 11px;
+                }
+            }
+        }
+        margin: 5px;
+        grid-template-areas: 
+            "a a a"
+            "b b c"
+            "h i d "
+            "e f g";
+        .divToday{
+            grid-template-areas: 
+            "a a"
+            "d b"
+            "f f"
+            "c e"
+            "g g";
+        }
+    }
+}
+

@@ -7,6 +7,8 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         divToday.setAttribute("class", "divToday");
         let tempExacte = Math.floor(data["hourly"]["2"]["temp"]);
         let presExacte = data["hourly"]["2"]["pressure"];
+        let windExactems = Math.floor(data["hourly"]["2"]["wind_gust"]);
+        let windExacte = windExactems * 3.6;
         let iconExacte = data["hourly"]["2"]["weather"]["0"]["icon"];
         let iconExacteHtml = document.createElement("img");
         let temp = Math.floor(data["hourly"]["0"]["temp"]);
@@ -16,6 +18,8 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let humidity = data["current"]["humidity"];
         let precision = data["current"]["weather"]["0"]["description"];
         let precisionIcon = document.createElement("p");
+        let windExacteHtml = document.createElement("span");
+        let windpresHtml = document.createElement("p");
         let precisionValue = precision[0].toUpperCase() + precision.substring(1);
 
         //Lever et couche de soleil
@@ -32,11 +36,12 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         //Indice UV
         let uv = data["current"]["uvi"];
         let uvp = document.createElement("p");
+        let uvP = document.createElement("p");
         let uvHtml = document.createElement("span");
         let uvImg = document.createElement("img");
 
         //Vent
-        let windCurrent = data["current"]["wind_speed"];
+        let windCurrent = data["hourly"]["0"]["wind_gust"];
         let wind = Math.floor(windCurrent * 3.6);
         let windHtml = document.createElement("p");
         let windImg = document.createElement("img");
@@ -71,8 +76,10 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         divHeure.setAttribute("class", "divHeure");
         let temperatureHtml = document.createElement("span");
         let temperatureP = document.createElement("p");
-        let pressureP = document.createElement("p");
+        let pressureP = document.createElement("span");
         let soleilCycleHtml = document.createElement("p");
+        let divDebutCycle = document.createElement("div");
+        let divFinCycle = document.createElement("div");
         let sunriseCycleHtml = document.createElement("span");
         let sunsetCycleHtml = document.createElement("span");
         let sunriseImg = document.createElement("img");
@@ -89,18 +96,61 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
 
         //Meteo dans 6h - declaration des variables
 
-        let tempsix = Math.floor(data["hourly"]["5"]["temp"]);
-        let pressionsix = data["hourly"]["5"]["pressure"]
-        let unixsix = data["hourly"]["5"]["dt"];
-        let iconsix = data["hourly"]["5"]["weather"]["0"]["icon"];
+        let tempsix = Math.floor(data["hourly"]["4"]["temp"]);
+        let pressionsix = data["hourly"]["4"]["pressure"];
+        let windsixms = Math.floor(data["hourly"]["4"]["wind_gust"]);
+        let windsix = Math.floor(windsixms *3.6);
+        let unixsix = data["hourly"]["4"]["dt"];
+        let iconsix = data["hourly"]["4"]["weather"]["0"]["icon"];
         let datesix = new Date(unixsix * 1000);
         let heuresix = datesix.getHours() + " : " + minutesExacte.substr(-2);
         let temperaturesixHtml = document.createElement("p");
         let pressionsixHtml = document.createElement("p");
         let heuresixHtml = document.createElement("p");
         let iconsixHtml = document.createElement("img");
+        let windsixHtml = document.createElement("span");
+        let windpressixHtml = document.createElement("p");
         let divsix = document.createElement("div");
         divsix.setAttribute("class", "divsix");
+        
+        //Meteo dans 8h - declaration des variables
+
+        let temphuit = Math.floor(data["hourly"]["7"]["temp"]);
+        let pressionhuit = data["hourly"]["7"]["pressure"];
+        let windhuitms = Math.floor(data["hourly"]["7"]["wind_gust"]);
+        let windhuit = Math.floor(windhuitms * 3.6);
+        let unixhuit = data["hourly"]["7"]["dt"];
+        let iconhuit = data["hourly"]["7"]["weather"]["0"]["icon"];
+        let datehuit = new Date(unixhuit * 1000);
+        let heurehuit = datehuit.getHours() + " : " + minutesExacte.substr(-2);
+        let temperaturehuitHtml = document.createElement("p");
+        let pressionhuitHtml = document.createElement("p");
+        let heurehuitHtml = document.createElement("p");
+        let iconhuitHtml = document.createElement("img");
+        let windhuitHtml = document.createElement("span");
+        let windpreshuitHtml = document.createElement("p");
+        let divhuit = document.createElement("div");
+        divhuit.setAttribute("class", "divHuit");
+
+        //Meteo dans 10h - declaration des variables
+
+        let tempdix = Math.floor(data["hourly"]["9"]["temp"]);
+        let pressiondix = data["hourly"]["9"]["pressure"]
+        let winddixms = Math.floor(data["hourly"]["9"]["wind_gust"]);
+        let winddix = Math.floor(winddixms * 3.6);
+        let unixdix = data["hourly"]["9"]["dt"];
+        let icondix = data["hourly"]["9"]["weather"]["0"]["icon"];
+        let datedix = new Date(unixdix * 1000);
+        let heuredix = datedix.getHours() + " : " + minutesExacte.substr(-2);
+        let temperaturedixHtml = document.createElement("p");
+        let pressiondixHtml = document.createElement("p");
+        let heuredixHtml = document.createElement("p");
+        let icondixHtml = document.createElement("img");
+        let winddixHtml = document.createElement("span");
+        let windpresdixHtml = document.createElement("p");
+        let divdix = document.createElement("div");
+        divdix.setAttribute("class", "divDix");
+
 
         //Meteo du lendemain - declaration des variables
         let tempTomorrow = Math.floor(data["daily"]["1"]["temp"]["eve"]);
@@ -126,6 +176,8 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
 
         //Meteo du sur-lendemain - declaration des variables
         let temp2 = Math.floor(data["daily"]["2"]["temp"]["eve"]);
+        let temp2Min = Math.floor(data["daily"]["2"]["temp"]["min"]);
+        let temp2Max = Math.floor(data["daily"]["2"]["temp"]["max"]);
         let pression2 = data["daily"]["2"]["pressure"]
         let unix2 = data["daily"]["2"]["dt"];
         let icon2 = data["daily"]["2"]["weather"]["0"]["icon"];
@@ -136,12 +188,18 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let div2 = document.createElement("div");
         div2.setAttribute("class" , "div2")
         let day2Html = document.createElement("p");
-        let temp2Html = document.createElement("p");
+        let temp2Html = document.createElement("span");
+        let temp2HtmlMin = document.createElement("span");
+        let temp2HtmlMax = document.createElement("span");
         let pression2Html = document.createElement("p");
         let icon2Html = document.createElement("img");
+        temp2HtmlMax.setAttribute("class", "temp2Max");
+        temp2HtmlMin.setAttribute("class", "temp2Min");
 
         //Meteo 3 jours plus tard - declaration des variables
         let temp3 = Math.floor(data["daily"]["3"]["temp"]["eve"]);
+        let temp3Min = Math.floor(data["daily"]["3"]["temp"]["min"]);
+        let temp3Max = Math.floor(data["daily"]["3"]["temp"]["max"]);
         let pression3 = data["daily"]["3"]["pressure"]
         let unix3 = data["daily"]["3"]["dt"];
         let icon3 = data["daily"]["3"]["weather"]["0"]["icon"];
@@ -152,13 +210,19 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let div3 = document.createElement("div");
         div3.setAttribute("class", "div3")
         let day3Html = document.createElement("p");
-        let temp3Html = document.createElement("p");
+        let temp3Html = document.createElement("span");
+        let temp3HtmlMax = document.createElement("span");
+        let temp3HtmlMin = document.createElement("span");
         let pression3Html = document.createElement("p");
         let icon3Html = document.createElement("img");
+        temp3HtmlMax.setAttribute("class", "temp3Max");
+        temp3HtmlMin.setAttribute("class", "temp3Min");
 
         //Meteo 4 jours plus tard - declaration des variables
 
         let temp4 = Math.floor(data["daily"]["4"]["temp"]["eve"]);
+        let temp4Max = Math.floor(data["daily"]["4"]["temp"]["max"]);
+        let temp4Min = Math.floor(data["daily"]["4"]["temp"]["min"]);
         let pression4 = data["daily"]["4"]["pressure"]
         let unix4 = data["daily"]["4"]["dt"];
         let icon4 = data["daily"]["4"]["weather"]["0"]["icon"];
@@ -169,14 +233,16 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let div4 = document.createElement("div");
         div4.setAttribute("class", "div4")
         let day4Html = document.createElement("p");
-        let temp4Html = document.createElement("p");
+        let temp4Html = document.createElement("span");
+        let temp4HtmlMax = document.createElement("span");
+        let temp4HtmlMin = document.createElement("span");
         let pression4Html = document.createElement("p");
         let icon4Html = document.createElement("img");
+        temp4HtmlMax.setAttribute("class", "temp4Max");
+        temp4HtmlMin.setAttribute("class", "temp4Min");
 
         //Changement de fond en fonction de l'icon
         let iconActuel = data["current"]["weather"]["0"]["icon"];
-        console.log(iconActuel.substr(2)); 
-        console.log(parseInt(iconActuel.substr(0,2)));
         if(iconActuel.substr(2) == "d"){
             if(parseInt(iconActuel.substr(0,2)) > 4){
                 body.style.background = "url('./img/cielCouvert.jpeg')";
@@ -185,7 +251,12 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
                 console.log()
             }
         }else{
-
+            if(parseInt(iconActuel.substr(0,2)) > 4){
+                body.style.background = "url('./img/cielCouvert.jpeg')";
+            }else{
+                body.style.background = "url('./img/nuit.jpg')";
+            }
+            
         }
 
         //Attribution de class pour la grille divToday
@@ -276,6 +347,7 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
                 jour4 = "Sam";   
             }
         }
+
         body.appendChild(section);
         section.appendChild(divToday);
             divToday.appendChild(heureAffichageHtml);
@@ -286,27 +358,54 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
             divToday.appendChild(pressureP);
             divToday.appendChild(pHumidity);
             divToday.appendChild(soleilCycleHtml);
-                soleilCycleHtml.appendChild(sunriseCycleHtml);
-                soleilCycleHtml.appendChild(sunriseImg);
+                soleilCycleHtml.appendChild(divDebutCycle)
+                    divDebutCycle.appendChild(sunriseCycleHtml);
+                    divDebutCycle.appendChild(sunriseImg);
                 soleilCycleHtml.appendChild(separationSoleil)
-                soleilCycleHtml.appendChild(sunsetImg);
-                soleilCycleHtml.appendChild(sunsetCycleHtml);
+                soleilCycleHtml.appendChild(divFinCycle)
+                    divFinCycle.appendChild(sunsetImg);
+                    divFinCycle.appendChild(sunsetCycleHtml);
             divToday.appendChild(uvp);
-                uvp.appendChild(uvImg);
-                uvp.appendChild(uvHtml);
-            divToday.appendChild(windHtml);
-                windHtml.appendChild(windImg);
-                windHtml.appendChild(windspan)
+                uvp.appendChild(uvP)
+                    uvP.appendChild(uvImg);
+                    uvP.appendChild(uvHtml);
+                uvp.appendChild(windHtml)
+                    windHtml.appendChild(windImg);
+                    windHtml.appendChild(windspan);
+
+
         section.appendChild(divHeure)
             divHeure.appendChild(heureExacte);
             divHeure.appendChild(temperatureExacte);
-            divHeure.appendChild(pressionExacte);
+            divHeure.appendChild(windpresHtml);
+                windpresHtml.appendChild(pressionExacte);
+                windpresHtml.appendChild(windExacteHtml);
             divHeure.appendChild(iconExacteHtml);
+
         section.appendChild(divsix);
             divsix.appendChild(heuresixHtml);
             divsix.appendChild(temperaturesixHtml);
-            divsix.appendChild(pressionsixHtml);
+            divsix.appendChild(windpressixHtml)
+                windpressixHtml.appendChild(pressionsixHtml);
+                windpressixHtml.appendChild(windsixHtml);
             divsix.appendChild(iconsixHtml);
+
+        section.appendChild(divhuit);
+            divhuit.appendChild(heurehuitHtml);
+            divhuit.appendChild(temperaturehuitHtml);
+            divhuit.appendChild(windpreshuitHtml);
+                windpreshuitHtml.appendChild(pressionhuitHtml);
+                windpreshuitHtml.appendChild(windhuitHtml);
+            divhuit.appendChild(iconhuitHtml);
+
+        section.appendChild(divdix);
+            divdix.appendChild(heuredixHtml);
+            divdix.appendChild(temperaturedixHtml)
+            divdix.appendChild(windpresdixHtml);
+                windpresdixHtml.appendChild(pressiondixHtml);
+                windpresdixHtml.appendChild(winddixHtml);
+            divdix.appendChild(icondixHtml);
+
         section.appendChild(divTomorrowHtml);
             divTomorrowHtml.appendChild(dayTomorrowHtml);
             divTomorrowHtml.appendChild(tempMinTomorrowHtml);
@@ -314,19 +413,28 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
             divTomorrowHtml.appendChild(tempMaxTomorrowHtml)
             divTomorrowHtml.appendChild(pressionTomorrowHtml);
             divTomorrowHtml.appendChild(iconTomorrowHtml);
+
         section.appendChild(div2);
             div2.appendChild(day2Html);
+            div2.appendChild(temp2HtmlMin);
             div2.appendChild(temp2Html);
+            div2.appendChild(temp2HtmlMax);
             div2.appendChild(pression2Html);
             div2.appendChild(icon2Html);
+
         section.appendChild(div3);
             div3.appendChild(day3Html);
+            div3.appendChild(temp3HtmlMin);
             div3.appendChild(temp3Html);
+            div3.appendChild(temp3HtmlMax);
             div3.appendChild(pression3Html);
             div3.appendChild(icon3Html);
+
         section.appendChild(div4);
             div4.appendChild(day4Html);
+            div4.appendChild(temp4HtmlMin);
             div4.appendChild(temp4Html);
+            div4.appendChild(temp4HtmlMax);
             div4.appendChild(pression4Html);
             div4.appendChild(icon4Html);
 
@@ -345,18 +453,30 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         uvHtml.innerHTML = uv ; 
         windImg.setAttribute("src", "./img/vent.png");
         windspan.innerHTML = wind + " km/h" ;
-        
-        // heure lever de soleil + img lever de soleil + image de separation + img coucher de soleil + heure de coucher
 
         heureExacte.innerHTML = formattedTime;
         temperatureExacte.innerHTML = tempExacte + uniteDegre;
         pressionExacte.innerHTML = presExacte + unitePascal;
+        windExacteHtml.innerHTML = windExacte + " km/h";
         iconExacteHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+iconExacte+".png");
 
         heuresixHtml.innerHTML = heuresix;
         temperaturesixHtml.innerHTML = tempsix + uniteDegre;
         pressionsixHtml.innerHTML = pressionsix + unitePascal;
+        windsixHtml.innerHTML = windsix + " km/h";
         iconsixHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+iconsix+".png");
+
+        heurehuitHtml.innerHTML = heurehuit;
+        temperaturehuitHtml.innerHTML = temphuit + uniteDegre;
+        pressionhuitHtml.innerHTML = pressionhuit + unitePascal;
+        windhuitHtml.innerHTML = windhuit + " km/h";
+        iconhuitHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+iconhuit+".png");
+
+        heuredixHtml.innerHTML = heuredix;
+        temperaturedixHtml.innerHTML = tempdix + uniteDegre;
+        pressiondixHtml.innerHTML = pressiondix + unitePascal;
+        winddixHtml.innerHTML = winddix + " km/h";
+        icondixHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+icondix+".png");
 
         dayTomorrowHtml.innerHTML = jourTomorrow + " " +dayTomorrow + " / " + monthTomorrow;
         tempMinTomorrowHtml.innerHTML = tempMinTomorrow + uniteDegre;
@@ -366,42 +486,25 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         iconTomorrowHtml.setAttribute("src", "http://openweathermap.org/img/wn/"+iconTomorrow+".png")
 
         day2Html.innerHTML = jour2 + " " +day2 + " / " + month2;
-        temp2Html.innerHTML = temp2 + uniteDegre;
+        temp2HtmlMin.innerHTML = temp2Min + uniteDegre;
+        temp2Html.innerHTML = " - " + temp2 + uniteDegre + " - ";
+        temp2HtmlMax.innerHTML = temp2Max + uniteDegre;
         pression2Html.innerHTML = pression2 + unitePascal;
         icon2Html.setAttribute("src", "http://openweathermap.org/img/wn/"+icon2+".png");
 
         day3Html.innerHTML = jour3 + " " +day3 + " / " + month3;
-        temp3Html.innerHTML = temp3 + uniteDegre;
+        temp3HtmlMin.innerHTML = temp3Min + uniteDegre;
+        temp3Html.innerHTML = " - " +temp3 + uniteDegre+ " - ";
+        temp3HtmlMax.innerHTML = temp3Max + uniteDegre;
         pression3Html.innerHTML = pression3 + unitePascal;
         icon3Html.setAttribute("src", "http://openweathermap.org/img/wn/"+icon3+".png");
 
         day4Html.innerHTML = jour4 + " " +day4 + " / " + month4;
-        temp4Html.innerHTML = temp4 + uniteDegre;
+        temp4HtmlMin.innerHTML = temp4Min + uniteDegre;
+        temp4Html.innerHTML = " - " + temp4 + uniteDegre + " - ";
+        temp4HtmlMax.innerHTML = temp4Max + uniteDegre;
         pression4Html.innerHTML = pression4 + unitePascal;
         icon4Html.setAttribute("src", "http://openweathermap.org/img/wn/"+icon4+".png");
-
-
-        // function checkTime(i) {
-        //     if (i < 10) {
-        //       i = "0" + i;
-        //     }
-        //     return i;
-        //   }
-          
-        //   function startTime() {
-        //     var today = new Date();
-        //     var h = today.getHours();
-        //     var m = today.getMinutes();
-        //     var s = today.getSeconds();
-        //     // add a zero in front of numbers<10
-        //     m = checkTime(m);
-        //     s = checkTime(s);
-        //     document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
-        //     t = setTimeout(function() {
-        //       startTime()
-        //     }, 500);
-        //   }
-        //   startTime();
 
 
         
