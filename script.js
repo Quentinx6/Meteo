@@ -8,12 +8,10 @@ fetch("https://api.openweathermap.org/data/2.5/onecall?lat=50.679393&lon=1.57166
         let tempExacte = Math.floor(data["hourly"]["2"]["temp"]);
         let presExacte = data["hourly"]["2"]["pressure"];
         let windExactems = Math.floor(data["hourly"]["2"]["wind_gust"]);
-        let windExacte = windExactems * 3.6;
+        let windExacte = Math.floor(windExactems * 3.6);
         let iconExacte = data["hourly"]["2"]["weather"]["0"]["icon"];
         let iconExacteHtml = document.createElement("img");
         let temp = Math.floor(data["hourly"]["0"]["temp"]);
-        let meteoToday = "La météo d'aujourd'hui à "; 
-        let pressionHtml = "La pression atmosphérique est de : ";
         let pressure = data["current"]["pressure"];
         let humidity = data["current"]["humidity"];
         let precision = data["current"]["weather"]["0"]["description"];

@@ -172,10 +172,11 @@ section{
             }
         }
         grid-template-areas: 
-            "a a a"
-            "b b c"
-            "h i d "
-            "e f g";
+            "a a"
+            "b c"
+            "h d"
+            "i e"
+            "f g";
         .divToday{
             grid-template-areas: 
             "a a"

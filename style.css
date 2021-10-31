@@ -153,7 +153,7 @@ section .div4 .temp4Min {
 /*             Mobile Responsive             */
 @media screen and (max-width: 500px) and (min-width: 351px) {
   #section {
-    grid-template-areas: "a a a" "b b c" "h i d " "e f g";
+    grid-template-areas: "a a" "b c" "h d" "i e" "f g";
   }
   #section .soleilCycle div span {
     margin: 0 10px;
